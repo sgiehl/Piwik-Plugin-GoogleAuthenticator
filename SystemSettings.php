@@ -1,3 +1,4 @@
+<?php
 /**
  * Piwik - free/libre analytics platform
  *
@@ -24,13 +25,13 @@ class SystemSettings extends \Piwik\Settings\Plugin\SystemSettings
     public $globalEnable;
 
     protected function init()
-    {   
+    {
         // Set globaleEnable 
         $this->globalEnable = $this->setGlobalEnableSetting();
     }
 
     private function setGlobalEnableSetting()
-    {   
+    {
         return $this->makeSetting('globalEnabled', $default = false, FieldConfig::TYPE_STRING, function (FieldConfig $field) {
             $field->title = 'Global Enable Setting';
             $field->uiControl = FieldConfig::UI_CONTROL_SINGLE_SELECT;
