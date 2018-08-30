@@ -127,9 +127,23 @@ class Auth extends \Piwik\Plugins\Login\Auth
 
             $this->validateAuthCode();
 
-            // if Google Authenticator is disabled, or user already validated with auth code
-            if (!$storage->isActive() || $this->getValidatedWithAuthCode()) {
-                return new AuthResult($authResult->getCode(), $authResult->getIdentity(), $authResult->getTokenAuth());
+            $settings = new \Piwik\Plugins\GoogleAuthenticator\SystemSettings();
+            $globalEnable = $settings->globalEnable->getValue();
+            
+            if($globalEnable){
+                
+                // only login if user already validated with auth code
+                if ($this->getValidatedWithAuthCode()) {
+                        return $authResult;
+                }
+
+             }else{
+                
+                // if Google Authenticator is disabled, or user already validated with auth code
+                if (!$storage->isActive() || $this->getValidatedWithAuthCode()) {
+                        return $authResult;
+                }
+                
             }
 
             $authResult = new AuthResult(self::AUTH_CODE_REQUIRED, $this->login, $this->token_auth);
