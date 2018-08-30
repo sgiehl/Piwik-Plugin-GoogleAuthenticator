@@ -7,6 +7,8 @@
         "SecretDescription": "Google 認証システムの秘密鍵",
         "SecretGenerated": "新しい秘密鍵が生成されています。QR コードを再スキャンまたはGoogle 認証 App で秘密鍵を更新してください。",
         "Activate": "Google 認証システムをアクティブにします。",
+        "ActivityActivated": "Google 認証システムのセキュアログインを有効にしました",
+        "ActivityDisabled": "Google 認証システムのセキュアログインを無効にしました",
         "SetUp": "Google 認証システムを設定します。",
         "GenerateNewSecret": "新しい秘密鍵を生成",
         "ToggleQRCode": "QR コードの表示\/非表示",
@@ -24,6 +26,6 @@
         "Disabled": "このアカウントのGoogle認証サポートが無効にされました",
         "AuthCodeRequired": "Google 認証アプリから認証コードを入力してください。",
         "AuthCodeInvalid": "認証コードが無効です。",
-        "LoginPluginDisabled": "Piwik ログインのプラグインは、Google 認証システムと競合するため、自動で無効にされています。既定のログイン ( Google 認証システムなし ) に切り替えるには、Google 認証システム プラグインを無効にしてください。"
+        "LoginPluginDisabled": "Matomo ログインのプラグインは、Google 認証システムと競合するため、自動で無効にされています。既定のログイン ( Google 認証システムなし ) に切り替えるには、Google 認証システム プラグインを無効にしてください。"
     }
 }

@@ -1,0 +1,31 @@
+{
+    "GoogleAuthenticator": {
+        "Menu": "Google Authenticator",
+        "Settings": "Google Authenticator 設定",
+        "DisabledInfo": "Google Authenticator 目前已停用。請點擊下方按鈕來為你的帳號啟用 Google Authenticator。",
+        "Secret": "秘密金鑰",
+        "SecretDescription": "Google Authenticator 秘密金鑰",
+        "SecretGenerated": "已產生新的秘密金鑰。請重新掃描 QR Code 或是在 Google Authenticator 應用程式中更新秘密金鑰。",
+        "Activate": "啟用 Google Authenticator",
+        "ActivityActivated": "已啟用 Google Authenticator 安全登入",
+        "ActivityDisabled": "已停用 Google Authenticator 安全登入",
+        "SetUp": "設定 Google Authenticator",
+        "GenerateNewSecret": "產生新的秘密金鑰",
+        "ToggleQRCode": "顯示\/隱藏 QR Code",
+        "QRCodeDescription": "使用 Google Authenticator App 來掃描此 QR Code。",
+        "AuthCode": "驗證碼",
+        "AuthCodeNewDescription": "請在 Google Authenticator 應用程式中更新秘密金鑰後輸入驗證碼。",
+        "Proceed": "繼續",
+        "NewSecretSaved": "你的 Google Authenticator 新秘密金鑰已經保存。",
+        "Title": "標題",
+        "TitleDescription": "要在 Google Authenticator 應用程式中顯示的標題。",
+        "Description": "說明",
+        "DescriptionDescription": "要在 Google Authenticator 應用程式中顯示的說明。",
+        "Change": "變更",
+        "Disable": "停用",
+        "Disabled": "此帳號的 Google Authenticator 支援已停用",
+        "AuthCodeRequired": "請填入 Google Authenticator 應用程式中的驗證碼。",
+        "AuthCodeInvalid": "驗證碼無效",
+        "LoginPluginDisabled": "Matomo 登入已自動停用，因為它和 Google Authenticator 衝突。要切換回預設登入（不使用 Google Authenticator），請停用 Google Authenticator 外掛。"
+    }
+}

@@ -7,6 +7,8 @@
         "SecretDescription": "Tajemství Google Authenticator",
         "SecretGenerated": "Bylo vygenerováno nové tajemství. Znovu naskenujte QR kód, nebo ho aktualizujte v Google Authenticatoru.",
         "Activate": "Aktivovat Google Authenticator",
+        "ActivityActivated": "aktivoval bezpečné přihlášení pomocí Google authenticatoru",
+        "ActivityDisabled": "zakázal bezpečné přihlášení pomocí Google authhenticatoru",
         "SetUp": "Nastavit Google Authenticator",
         "GenerateNewSecret": "Vygenerovat nové tajemství",
         "ToggleQRCode": "Zobrazit\/skrýt QR kód",
@@ -24,6 +26,6 @@
         "Disabled": "Podpora Google Authenticatoru pro tento účet byla zakázána",
         "AuthCodeRequired": "Prosím, zde zadejte autentizační kód z vaší aplikace Google Authenticator.",
         "AuthCodeInvalid": "Autentizační kód neplatný",
-        "LoginPluginDisabled": "Zásuvný modul přihlášení přes Piwik byl automaticky zakázán, protože je v konfliktu s Google Authenticatorem. Pokud se chcete vrátit zpět k přihlášení bez Google Authenticatoru, zakažte jeho zásuvný modul."
+        "LoginPluginDisabled": "Zásuvný modul přihlášení přes Matomo byl automaticky zakázán, protože je v konfliktu s Google Authenticatorem. Pokud se chcete vrátit zpět k přihlášení bez Google Authenticatoru, zakažte jeho zásuvný modul."
     }
 }

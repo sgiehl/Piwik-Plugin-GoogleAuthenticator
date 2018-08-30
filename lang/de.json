@@ -7,6 +7,8 @@
         "SecretDescription": "Google Authenticator-Geheimschlüssel",
         "SecretGenerated": "Ein neuer Geheimschlüssel wurde generiert. Bitte scannen Sie den QR-Code erneut oder aktualisieren Sie den Geheimschlüssel in Ihrer Google Authenticator-App.",
         "Activate": "Google Authenticator aktivieren",
+        "ActivityActivated": "hat den sicheren Login mit Google Authenticator aktiviert",
+        "ActivityDisabled": "hat den sicheren Login mit Google Authenticator deaktiviert",
         "SetUp": "Google Authenticator einrichten",
         "GenerateNewSecret": "Neuen Geheimschlüssel generieren",
         "ToggleQRCode": "QR-Code ein-\/ausblenden",
@@ -24,6 +26,6 @@
         "Disabled": "Google Authenticator wurde für dieses Account deaktiviert.",
         "AuthCodeRequired": "Bitte geben Sie den Bestätigungscode aus Ihrer Google Authenticator-App ein.",
         "AuthCodeInvalid": "Bestätigungscode nicht gültig",
-        "LoginPluginDisabled": "Das Login-Plugin von Piwik wurde automatisch deaktiviert, da es mit Google Authenticator kollidiert. Um wieder zurück zum normalen Login (ohne Google Authenticator) zu wechseln, deaktivieren Sie das Google Authenticator Plugin."
+        "LoginPluginDisabled": "Das Login-Plugin von Matomo wurde automatisch deaktiviert, da es mit Google Authenticator kollidiert. Um wieder zurück zum normalen Login (ohne Google Authenticator) zu wechseln, deaktivieren Sie das Google Authenticator Plugin."
     }
 }

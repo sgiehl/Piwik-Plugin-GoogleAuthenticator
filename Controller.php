@@ -8,12 +8,15 @@
  */
 namespace Piwik\Plugins\GoogleAuthenticator;
 
+use Endroid\QrCode\QrCode;
 use Piwik\Common;
 use Piwik\Auth as AuthInterface;
 use Piwik\Container\StaticContainer;
 use Piwik\Nonce;
 use Piwik\Piwik;
 use Piwik\Plugins\Login\PasswordResetter;
+use Piwik\Session\SessionNamespace;
+use Piwik\Plugins\UsersManager\Model AS UsersModel;
 use Piwik\Url;
 use Piwik\View;
 
@@ -124,7 +127,6 @@ class Controller extends \Piwik\Plugins\Login\Controller
         return $view->render();
     }
 
-
     /**
      * Pretty the same as in login action of Login plugin
      * - Adds the handling for required auth code for login
@@ -150,7 +152,8 @@ class Controller extends \Piwik\Plugins\Login\Controller
         if ($form->validate()) {
             $nonce = $form->getSubmitValue('form_nonce');
             if (Nonce::verifyNonce('Login.login', $nonce)) {
-                $login = $form->getSubmitValue('form_login');
+                $loginOrEmail = $form->getSubmitValue('form_login');
+                $login = $this->getLoginFromLoginOrEmail($loginOrEmail);
                 $password = $form->getSubmitValue('form_password');
                 $rememberMe = $form->getSubmitValue('form_rememberme') == '1';
                 try {
@@ -175,6 +178,18 @@ class Controller extends \Piwik\Plugins\Login\Controller
         return $view->render();
     }
 
+    private function getLoginFromLoginOrEmail($loginOrEmail)
+    {
+        $model = new UsersModel();
+        if (!$model->userExists($loginOrEmail)) {
+            $user = $model->getUserByEmail($loginOrEmail);
+            if (!empty($user)) {
+                return $user['login'];
+            }
+        }
+
+        return $loginOrEmail;
+    }
 
     /**
      * Password reset confirmation action. Finishes the password reset process.
@@ -188,7 +203,7 @@ class Controller extends \Piwik\Plugins\Login\Controller
         $authCodeValidOrNotRequired = !$storage->isActive();
 
         if (!$authCodeValidOrNotRequired) {
-            $googleAuth = new PHPGangsta\GoogleAuthenticator();
+            $googleAuth = StaticContainer::get('GoogleAuthenticator');
             $form = $this->getAuthCodeForm();
 
             if ($form->getSubmitValue('form_authcode') && $form->validate()) {
@@ -261,10 +276,11 @@ class Controller extends \Piwik\Plugins\Login\Controller
     {
         Piwik::checkUserIsNotAnonymous();
 
+        $session = new SessionNamespace('GoogleAuthenticator');
+        $session->secret = null;
+
         $view = new View('@GoogleAuthenticator/settings');
         $this->setGeneralVariablesView($view);
-
-        $googleAuth = new PHPGangsta\GoogleAuthenticator();
 
         $storage = new Storage(Piwik::getCurrentUserLogin());
 
@@ -284,8 +300,7 @@ class Controller extends \Piwik\Plugins\Login\Controller
         $view->showSetUp = Common::getRequestVar('setup', 0, 'int');
         $view->googleAuthIsActive = $storage->isActive();
         $view->googleAuthSecret = $secret;
-        $view->googleAuthImage = $googleAuth->getQRCodeGoogleUrl(Piwik::getCurrentUserLogin(), $secret,
-            'Piwik - ' . Url::getCurrentHost());
+        $view->googleAuthImage = $this->getCurrentQRUrl();
 
         return $view->render();
     }
@@ -306,14 +321,21 @@ class Controller extends \Piwik\Plugins\Login\Controller
         $view = new View('@GoogleAuthenticator/regenerate');
         $this->setGeneralVariablesView($view);
 
-        $googleAuth = new PHPGangsta\GoogleAuthenticator();
+        $googleAuth = StaticContainer::get('GoogleAuthenticator');
+        $session = new SessionNamespace('GoogleAuthenticator');
+
+        if (empty($session->secret)) {
+            $session->secret = $googleAuth->createSecret(32);
+        }
+
+        $secret = $session->secret;
+        $session->setExpirationSeconds(180, 'secret');
 
         $storage = new Storage(Piwik::getCurrentUserLogin());
-        $secret = Common::getRequestVar('gasecret', '', 'string');
         $authCode = Common::getRequestVar('gaauthcode', '', 'string');
         $authCodeNonce = Common::getRequestVar('authCodeNonce', '', 'string');
         $gatitle = Common::getRequestVar('gatitle', $storage->getTitle(), 'string');
-        $description = Common::getRequestVar('gadescription', $storage->getDescription(), 'string');
+        $description = Common::getRequestVar('description', $storage->getDescription(), 'string');
 
         if (!empty($secret) && !empty($authCode) && Nonce::verifyNonce(self::AUTH_CODE_NONCE, $authCodeNonce) &&
             $googleAuth->verifyCode($secret, $authCode, 2)
@@ -329,16 +351,51 @@ class Controller extends \Piwik\Plugins\Login\Controller
                 )));
         }
 
-        if (empty($secret)) {
-            $secret = $googleAuth->createSecret(32);
-        }
+        $this->secret = $secret;
 
         $view->gatitle = $gatitle;
         $view->description = $description;
         $view->authCodeNonce = Nonce::getNonce(self::AUTH_CODE_NONCE);
         $view->newSecret = $secret;
-        $view->googleAuthImage = $googleAuth->getQRCodeGoogleUrl($description, $secret, $gatitle);
+        $view->googleAuthImage = $this->getQRUrl($description, $gatitle);
 
         return $view->render();
+    }
+
+    public function showQrCode()
+    {
+        $showCurrent = Common::getRequestVar('current', '');
+
+        if ($showCurrent) {
+            $storage = new Storage(Piwik::getCurrentUserLogin());
+            $secret = $storage->getSecret();
+            $title = $storage->getTitle();
+            $descr = $storage->getDescription();
+        } else {
+            $session = new SessionNamespace('GoogleAuthenticator');
+            $secret = $session->secret;
+            $title = Common::getRequestVar('title', '');
+            $descr = Common::getRequestVar('descr', '');
+        }
+
+        $url = 'otpauth://totp/'.urlencode(Common::unsanitizeInputValue($descr)).'?secret='.$secret;
+        if(isset($title)) {
+            $url .= '&issuer='.urlencode(Common::unsanitizeInputValue($title));
+        }
+
+        $qrCode = new QrCode($url);
+
+        header('Content-Type: '.$qrCode->getContentType());
+        echo $qrCode->get();
+    }
+
+    protected function getQRUrl($description, $title)
+    {
+        return sprintf('index.php?module=GoogleAuthenticator&action=showQrCode&cb=%s&title=%s&descr=%s', Common::getRandomString(8), urlencode($title), urlencode($description));
+    }
+
+    protected function getCurrentQRUrl()
+    {
+        return sprintf('index.php?module=GoogleAuthenticator&action=showQrCode&cb=%s&current=1', Common::getRandomString(8));
     }
 }

@@ -26,6 +26,6 @@
         "Disabled": "Le support de l'authentification Google pour ce compte a été désactivé.",
         "AuthCodeRequired": "Veuillez saisir le code d'authentification provenant de votre application Authentification Google.",
         "AuthCodeInvalid": "Code d'authentification non valide",
-        "LoginPluginDisabled": "Le composant d'authentification de Piwik a été désactivé automatiquement car il causerait des conflits avec l'authentification Google. Pour revenir au système d'authentification par défaut (sans l'authentification Google), veuillez désactiver le composant d'authentification Google."
+        "LoginPluginDisabled": "Le composant d'authentification de Matomo a été désactivé automatiquement car il causerait des conflits avec l'authentification Google. Pour revenir au système d'authentification par défaut (sans l'authentification Google), veuillez désactiver le composant d'authentification Google."
     }
 }

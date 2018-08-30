@@ -17,7 +17,7 @@ Applications accessing your Piwik data using the API might thus no longer work. 
 
 ### Requirements
 
-[Piwik](https://github.com/piwik/piwik) 3.0.0 or higher is required.
+[Piwik](https://github.com/piwik/piwik) 3.6.0 or higher is required.
 
 Google Authenticator App for [Android](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2), [iOS](https://itunes.apple.com/de/app/google-authenticator/id388497605?mt=8) or [Blackberry](https://m.google.com/authenticator) needs to be [installed](https://support.google.com/accounts/answer/1066447?hl=de) on your mobile device
 
@@ -27,6 +27,7 @@ Google Authenticator App for [Android](https://play.google.com/store/apps/detail
 
 ## Changelog
 
+- 3.2.0 compatibility to Matomo 3.6.0
 - 3.0.0 compatibility to Piwik 3.0
 - 0.1.0 Added possibility to define title and description for Google Authenticator app
 - 0.0.4 fixes password reset link
@@ -36,7 +37,7 @@ Google Authenticator App for [Android](https://play.google.com/store/apps/detail
 
 ## Support
 
-Please direct any feedback to [stefan@piwik.org](mailto:stefan@piwik.org)
+Please direct any feedback to [stefan@matomo.org](mailto:stefan@matomo.org)
 
 ## Contribute
 

@@ -10,6 +10,8 @@ namespace Piwik\Plugins\GoogleAuthenticator;
 
 use \Exception;
 use Piwik\AuthResult;
+use Piwik\Container\StaticContainer;
+use Piwik\Session;
 use Piwik\Session\SessionNamespace;
 
 /**
@@ -41,21 +43,6 @@ class Auth extends \Piwik\Plugins\Login\Auth
     public function getName()
     {
         return 'GoogleAuthenticator';
-    }
-
-    /**
-     * Sets whether the current session is validated with auth code
-     * @param bool|true $isValid
-     */
-    protected function setValidatedWithAuthCode($isValid = true)
-    {
-        $this->validatedWithAuthCode = $isValid;
-        try {
-            $session = new SessionNamespace('GoogleAuthenticator');
-            $session->validatedWithAuthCode = $isValid;
-        } catch (Exception $e) {
-            // ignore as that should only happen in tests
-        }
     }
 
     /**
@@ -106,12 +93,11 @@ class Auth extends \Piwik\Plugins\Login\Auth
         $storage = new Storage($this->getLogin());
 
         $secret = $storage->getSecret();
-        $googleAuth = new PHPGangsta\GoogleAuthenticator();
+        $googleAuth = StaticContainer::get('GoogleAuthenticator');
         if (!empty($secret) && $googleAuth->verifyCode($secret, $this->authCode, 2)) {
             $this->setValidatedWithAuthCode(true);
             return true;
         }
-
         return false;
     }
 
@@ -122,37 +108,32 @@ class Auth extends \Piwik\Plugins\Login\Auth
      */
     public function authenticate()
     {
-        $authResult = parent::authenticate();
+        Session::start();
+
+        $sessionAuth = StaticContainer::get(\Piwik\Session\SessionAuth::class);
+        $authResult = $sessionAuth->authenticate();
+        if ($authResult->wasAuthenticationSuccessful()) {
+            return $authResult;
+        }
+
+        if ($authResult->getCode() != self::AUTH_CODE_REQUIRED) {
+            $authResult = parent::authenticate();
+        }
 
         // if authentication was correct, check if an auth code is required
-        if ($authResult->wasAuthenticationSuccessful()) {
-
+        if ($authResult->wasAuthenticationSuccessful() || $authResult->getCode() == self::AUTH_CODE_REQUIRED) {
             $this->setLogin($authResult->getIdentity());
             $storage = new Storage($authResult->getIdentity());
 
             $this->validateAuthCode();
 
-            $settings = new \Piwik\Plugins\GoogleAuthenticator\SystemSettings();
-            $globalEnable = $settings->globalEnable->getValue();
-
-            if($globalEnable){
-
-                // only login if user already validated with auth code
-                if ($this->getValidatedWithAuthCode()) {
-                        return $authResult;
-                }
-
-            }else{
-
-                // if Google Authenticator is disabled, or user already validated with auth code
-                if (!$storage->isActive() || $this->getValidatedWithAuthCode()) {
-                        return $authResult;
-                }
+            // if Google Authenticator is disabled, or user already validated with auth code
+            if (!$storage->isActive() || $this->getValidatedWithAuthCode()) {
+                return new AuthResult($authResult->getCode(), $authResult->getIdentity(), $authResult->getTokenAuth());
             }
 
             $authResult = new AuthResult(self::AUTH_CODE_REQUIRED, $this->login, $this->token_auth);
         }
-
         return $authResult;
     }
 
@@ -166,4 +147,18 @@ class Auth extends \Piwik\Plugins\Login\Auth
         $this->authCode = $authCode;
     }
 
+    /**
+     * Sets whether the current session is validated with auth code
+     * @param bool|true $isValid
+     */
+    protected function setValidatedWithAuthCode($isValid = true)
+    {
+        $this->validatedWithAuthCode = $isValid;
+        try {
+            $session = new SessionNamespace('GoogleAuthenticator');
+            $session->validatedWithAuthCode = $isValid;
+        } catch (Exception $e) {
+            // ignore as that should only happen in tests
+        }
+    }
 }

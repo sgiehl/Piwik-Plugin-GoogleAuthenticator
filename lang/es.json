@@ -1,12 +1,14 @@
 {
     "GoogleAuthenticator": {
         "Menu": "Google Authenticator",
-        "Settings": "Ajustes Google Authenticator",
-        "DisabledInfo": "Google Authenticator es actualmente deshabilitado. Haga clic a continuación para activar Google Authenticator en su cuenta.",
+        "Settings": "Ajustes de Google Authenticator",
+        "DisabledInfo": "Google Authenticator está actualmente deshabilitado. Haga clic a continuación para activar Google Authenticator para su cuenta.",
         "Secret": "Secreto",
         "SecretDescription": "Secreto del Google Authenticator",
-        "SecretGenerated": "Un nuevo secreto se ha generado. Por favor vuelva a escanerar el código QR o actualice el secreto en la aplicación Google Authenticator",
+        "SecretGenerated": "Se ha generado una nueva clave secreta. Por favor vuelva a escanerar el código QR o actualice la calve secreta en la aplicación Google Authenticator",
         "Activate": "Activar Google Authenticator",
+        "ActivityActivated": "ha activado el login seguro usando Google Authenticator",
+        "ActivityDisabled": "ha desactivado el login seguro usando Google Authenticator",
         "SetUp": "Configurar Google Authenticator",
         "GenerateNewSecret": "Generar nuevo secreto",
         "ToggleQRCode": "Mostrar\/ocultar código QR",
@@ -14,16 +16,16 @@
         "AuthCode": "Código Autorización",
         "AuthCodeNewDescription": "Por favor ingrese su código de autorización, después de actualizar su aplicación Google Authenticator con el nuevo secreto.",
         "Proceed": "Proceder",
-        "NewSecretSaved": "Su nuevo secreto de Google Authenticator ha sido guardado.",
+        "NewSecretSaved": "Su nueva clave secreta de Google Authenticator ha sido guardada.",
         "Title": "Título",
         "TitleDescription": "Título a mostrar en su Google Authenticator.",
         "Description": "Descripción",
         "DescriptionDescription": "Descripción a mostrar en su Google Authenticator.",
         "Change": "Cambiar",
         "Disable": "Deshabilitar",
-        "Disabled": "El respaldo de Google Authenticator para esta cuenta ha sido deshabilitado",
+        "Disabled": "Google Authenticator ha sido deshabilitado para esta cuenta",
         "AuthCodeRequired": "Por favor escriba el código de autenticación de su aplicación Google Authenticator.",
         "AuthCodeInvalid": "Código de autorización no válido",
-        "LoginPluginDisabled": "El complemento de inicio de sesión Piwik ha sido deshabilitado automáticamente, en tanto genera un conflicto con Google Authenticator. Para volver al inicio de sesión predeterminado (sin Google Authenticator), deshabilite el complemento Google Authenticator."
+        "LoginPluginDisabled": "El complemento de inicio de sesión Matomo ha sido deshabilitado automáticamente, en tanto genera un conflicto con Google Authenticator. Para volver al inicio de sesión predeterminado (sin Google Authenticator), deshabilite el complemento Google Authenticator."
     }
 }

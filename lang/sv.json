@@ -24,6 +24,6 @@
         "Disabled": "Google Authenticator support för detta kontot har inaktiverats.",
         "AuthCodeRequired": "Vänligen skriv in autentiseringskoden från din Google Authenticator app.",
         "AuthCodeInvalid": "Autentiseringskoden är inte giltig",
-        "LoginPluginDisabled": "Piwiks inloggningstillägg har inaktiverats automatiskt på grund av en konflikt med Google Authenticator. För att aktivera standardinloggningen (utan Google Authenticator) vänligen inaktivera Google Authenticator tillägget."
+        "LoginPluginDisabled": "Matomos inloggningstillägg har inaktiverats automatiskt på grund av en konflikt med Google Authenticator. För att aktivera standardinloggningen (utan Google Authenticator) vänligen inaktivera Google Authenticator tillägget."
     }
 }

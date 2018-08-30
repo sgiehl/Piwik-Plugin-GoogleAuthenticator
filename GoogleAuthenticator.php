@@ -9,9 +9,7 @@
 namespace Piwik\Plugins\GoogleAuthenticator;
 
 use Piwik\Common;
-use Piwik\Config;
 use Piwik\Container\StaticContainer;
-use Piwik\Cookie;
 use Piwik\FrontController;
 use Piwik\Notification;
 use Piwik\Piwik;
@@ -60,43 +58,6 @@ class GoogleAuthenticator extends \Piwik\Plugins\Login\Login
     public function postLoad()
     {
         $this->activate();
-    }
-
-    /**
-     * @param Auth $auth
-     */
-    public static function initAuthenticationFromCookie(\Piwik\Auth $auth, $activateCookieAuth)
-    {
-        if (self::isModuleIsAPI() && !$activateCookieAuth) {
-            return;
-        }
-
-        $authCookieName = Config::getInstance()->General['login_cookie_name'];
-        $authCookieExpiry = 0;
-        $authCookiePath = Config::getInstance()->General['login_cookie_path'];
-        $authCookie = new Cookie($authCookieName, $authCookieExpiry, $authCookiePath);
-        $defaultLogin = 'anonymous';
-        $defaultTokenAuth = 'anonymous';
-        if ($authCookie->isCookieFound()) {
-            $defaultLogin = $authCookie->get('login');
-            $defaultTokenAuth = $authCookie->get('token_auth');
-        }
-        $auth->setLogin($defaultLogin);
-        $auth->setTokenAuth($defaultTokenAuth);
-
-        $storage = new Storage($defaultLogin);
-
-        if (!$storage->isActive()) {
-            return;
-        }
-
-        $secret = $storage->getSecret();
-        $cookieSecret = $authCookie->get('auth_code');
-        if ($cookieSecret == SessionInitializer::getHashTokenAuth($defaultLogin, $secret)) {
-            $googleAuth = new PHPGangsta\GoogleAuthenticator();
-            $auth->setAuthCode($googleAuth->getCode($secret));
-            $auth->validateAuthCode();
-        }
     }
 
     /**

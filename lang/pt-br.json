@@ -24,6 +24,6 @@
         "Disabled": "O suporte do Autenticador Google para esta conta foi desativado",
         "AuthCodeRequired": "Por favor, digite o código de autenticação de seu Aplicativo Autenticador Google.",
         "AuthCodeInvalid": "Código de Autenticação não válido",
-        "LoginPluginDisabled": "O plugin Piwik Login foi desativado automaticamente, já que entra em conflito com o Autenticador Google. Para voltar ao Login padrão (sem Autenticador Google), desative o plugin Autenticador Google."
+        "LoginPluginDisabled": "O plugin Matomo Login foi desativado automaticamente, já que entra em conflito com o Autenticador Google. Para voltar ao Login padrão (sem Autenticador Google), desative o plugin Autenticador Google."
     }
 }

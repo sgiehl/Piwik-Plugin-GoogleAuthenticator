@@ -2,7 +2,7 @@
     "GoogleAuthenticator": {
         "Menu": "Google Authenticator",
         "Settings": "Google Authenticator -asetukset",
-        "DisabledInfo": "Google Authenticator on pois käytöstä. Ota käyttöön klikkaamalla alle.",
+        "DisabledInfo": "Google Authenticator on pois käytöstä. Ota käyttöön klikkaamalla alta.",
         "Secret": "Salaisuus",
         "SecretDescription": "Google Authenticatorin salaisuus",
         "SecretGenerated": "Uusi salaisuus on luotu. Skannaa QR-koodi tai päivitä salaisuus Google Authenticator -ohjelmaan.",
@@ -24,6 +24,6 @@
         "Disabled": "Tämän tilin Google Authenticator -tuki on poistettu käytöstä",
         "AuthCodeRequired": "Kirjoita autentikointikoodi Google Authenticator -ohjelmastasi.",
         "AuthCodeInvalid": "Väärä koodi",
-        "LoginPluginDisabled": "Piwik Login -lisäosa on poistettu käytöstä automaattisesti. Jos haluat vaihtaa takaisin normaaliin kirjautumiseen (ilman Google Authenticatoria), poista Google Authenticator -lisäosa pois käytöstä."
+        "LoginPluginDisabled": "Matomo Login -lisäosa on poistettu käytöstä automaattisesti. Jos haluat vaihtaa takaisin normaaliin kirjautumiseen (ilman Google Authenticatoria), poista Google Authenticator -lisäosa pois käytöstä."
     }
 }

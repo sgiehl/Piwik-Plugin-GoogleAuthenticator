@@ -24,6 +24,6 @@
         "Disabled": "Google Authenticator-støtte for denne kontoen har blitt deaktivert",
         "AuthCodeRequired": "Vennligst skriv inn auth-koden fra din Google Authenticator-app.",
         "AuthCodeInvalid": "Auth-kode er ikke gyldig",
-        "LoginPluginDisabled": "Piwik Login-utvidelsen har blitt deaktivert automatisk, siden den kommer i konflikt med Google Authenticator. For å bytte tilbake til standardinnlogging (uten Google Authenticator), vennligst deaktiver Google Authenticator-utvidelsen."
+        "LoginPluginDisabled": "Matomo Login-utvidelsen har blitt deaktivert automatisk, siden den kommer i konflikt med Google Authenticator. For å bytte tilbake til standardinnlogging (uten Google Authenticator), vennligst deaktiver Google Authenticator-utvidelsen."
     }
 }

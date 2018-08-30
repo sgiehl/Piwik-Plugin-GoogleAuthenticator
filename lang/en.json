@@ -26,6 +26,6 @@
     "Disabled": "Google Authenticator support for this account has been disabled",
     "AuthCodeRequired": "Please type in the auth code from your Google Authenticator App.",
     "AuthCodeInvalid": "Auth-Code not valid",
-    "LoginPluginDisabled": "Piwik Login plugin has been disabled automatically, as it conflicts with Google Authenticator. In order to switch back to default Login (without Google Authenticator), please disable Google Authenticator plugin."
+    "LoginPluginDisabled": "Matomo Login plugin has been disabled automatically, as it conflicts with Google Authenticator. In order to switch back to default Login (without Google Authenticator), please disable Google Authenticator plugin."
   }
 }

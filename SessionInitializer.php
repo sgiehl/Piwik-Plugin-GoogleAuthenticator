@@ -13,22 +13,21 @@ use Piwik\Auth as AuthInterface;
 use Piwik\AuthResult;
 use Piwik\Piwik;
 use Piwik\ProxyHttp;
+use Piwik\Session\SessionNamespace;
 
 /**
  * Extends SessionInitializer from Login plugin to handle the case that an auth code is required for login
  */
-class SessionInitializer extends \Piwik\Plugins\Login\SessionInitializer
+class SessionInitializer extends \Piwik\Session\SessionInitializer
 {
     /**
      * Authenticates the user and, if successful, initializes an authenticated session.
      *
      * @param \Piwik\Auth $auth The Auth implementation to use.
-     * @param bool $rememberMe Whether the authenticated session should be remembered after
-     *                         the browser is closed or not.
      * @throws AuthCodeRequiredException If authentication was successful but an google auth code is required to proceed
      * @throws Exception If authentication fails or the user is not allowed to login for some reason.
      */
-    public function initSession(AuthInterface $auth, $rememberMe)
+    public function initSession(AuthInterface $auth)
     {
         $this->regenerateSessionId();
 
@@ -37,15 +36,17 @@ class SessionInitializer extends \Piwik\Plugins\Login\SessionInitializer
         if (!$authResult->wasAuthenticationSuccessful()) {
             if ($authResult->getCode() === Auth::AUTH_CODE_REQUIRED) {
                 // Authenticate user with cookie, but throw exception as auth code is still required
-                $this->processSuccessfulSession($authResult, $rememberMe);
+                $this->processSuccessfulSession($authResult);
                 throw new AuthCodeRequiredException();
             }
 
             Piwik::postEvent('Login.authenticate.failed', array($auth->getLogin()));
 
-            $this->processFailedSession($rememberMe);
+            $this->processFailedSession();
         } else {
-            $this->processSuccessfulSession($authResult, $rememberMe);
+            Piwik::postEvent('Login.authenticate.successful', array($auth->getLogin()));
+
+            $this->processSuccessfulSession($authResult);
         }
     }
 
@@ -56,18 +57,14 @@ class SessionInitializer extends \Piwik\Plugins\Login\SessionInitializer
      * @param bool $rememberMe Whether the authenticated session should be remembered after
      *                         the browser is closed or not.
      */
-    protected function processSuccessfulSession(AuthResult $authResult, $rememberMe)
+    protected function processSuccessfulSession(AuthResult $authResult)
     {
+        parent::processSuccessfulSession($authResult);
+
         $storage = new Storage($authResult->getIdentity());
 
-        $cookie = $this->getAuthCookie($rememberMe);
-        $cookie->set('login', $authResult->getIdentity());
-        $cookie->set('token_auth', $this->getHashTokenAuth($authResult->getIdentity(), $authResult->getTokenAuth()));
         if ($storage->isActive() && $authResult->wasAuthenticationSuccessful()) {
-            $cookie->set('auth_code', $this->getHashTokenAuth($authResult->getIdentity(), $storage->getSecret()));
+            $_SESSION['auth_code'] = $this->getHashTokenAuth($authResult->getIdentity(), $storage->getSecret());
         }
-        $cookie->setSecure(ProxyHttp::isHttps());
-        $cookie->setHttpOnly(true);
-        $cookie->save();
     }
 }

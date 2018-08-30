@@ -7,6 +7,8 @@
         "SecretDescription": "Gugl autentifikator tajna",
         "SecretGenerated": "Generisana je nova tajna. Molimo vas da ponovo skenirate QR kod ili da ažurirate tajnu u Gugl autentifikator aplikaciji.",
         "Activate": "Aktivacija Gugl autentifikatora",
+        "ActivityActivated": "je aktivirao bezbedno prijavljivanje korišćenjem Gugl autentifikatora",
+        "ActivityDisabled": "je isključio bezbedno prijavljivanje korišćenjem Gugl autentifikatora",
         "SetUp": "Podešavanje Gugl autentifikatora",
         "GenerateNewSecret": "Generisanje nove tajne",
         "ToggleQRCode": "Prikaži\/sakrij QR kod",

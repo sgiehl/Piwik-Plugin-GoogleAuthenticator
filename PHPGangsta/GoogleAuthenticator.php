@@ -13,6 +13,7 @@ namespace Piwik\Plugins\GoogleAuthenticator\PHPGangsta;
  * small adjustments by @sgiehl
  * - added namespace
  * - renamed class
+ * - removed method getQRCodeGoogleUrl
  */
 
 class GoogleAuthenticator
@@ -70,22 +71,6 @@ class GoogleAuthenticator
 
         $modulo = pow(10, $this->_codeLength);
         return str_pad($value % $modulo, $this->_codeLength, '0', STR_PAD_LEFT);
-    }
-
-    /**
-     * Get QR-Code URL for image, from google charts
-     *
-     * @param string $name
-     * @param string $secret
-     * @param string $title
-     * @return string
-     */
-    public function getQRCodeGoogleUrl($name, $secret, $title = null) {
-        $urlencoded = urlencode('otpauth://totp/'.$name.'?secret='.$secret.'');
-        if(isset($title)) {
-            $urlencoded .= urlencode('&issuer='.urlencode($title));
-        }
-        return 'https://chart.googleapis.com/chart?chs=200x200&chld=M|0&cht=qr&chl='.$urlencoded.'';
     }
 
     /**

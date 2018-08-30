@@ -1,2 +1,7 @@
 .idea
 /tests/UI/processed-ui-screenshots
+vendor/**/tests/**
+vendor/**/Tests/**
+vendor/**/.travis.yml
+vendor/**/.gitignore
+vendor/**/phpunit.xml.dist

@@ -7,6 +7,8 @@
         "SecretDescription": "E fshehtë Mirëfilltësuesi Google",
         "SecretGenerated": "U prodhua një e fshehtë e re. Ju lutemi, riskanoni kodin QR ose përditësojeni të fshehtën te Aplikacioni Mirëfilltësues Google.",
         "Activate": "Aktivizo Mirëfilltësuesin Google",
+        "ActivityActivated": "ka aktivizuar hyrje të sigurt përmes përdorimit të Google Authenticator",
+        "ActivityDisabled": "ka çaktivizuar hyrje të sigurt përmes përdorimit të Google Authenticator",
         "SetUp": "Rregulloni Mirëfilltësuesin Google",
         "GenerateNewSecret": "Prodhoni të fshehtë të re",
         "ToggleQRCode": "Shfaqni\/Fshihni Kod QR",
@@ -24,6 +26,6 @@
         "Disabled": "Mbulimi i Mirëfilltësuesit Google për këtë llogari është çaktivizuar",
         "AuthCodeRequired": "Ju lutemi, shtypni kodin e mirëfilltësimit prej aplikacionit tuaj Mirëfilltësues Google.",
         "AuthCodeInvalid": "Kod Mirëfilltësimi i pavlefshëm",
-        "LoginPluginDisabled": "Shtojca Piwik e Hyrjeve është çaktivizuar vetvetiu, pasi përplaset me Mirëfilltësuesin Google. Që të mund të ktheni Hyrjen parazgjedhje (pa Mirëfilltësues Google), ju lutemi, çaktivizoni shtojcën Mirëfilltësues Google."
+        "LoginPluginDisabled": "Shtojca Matomo e Hyrjeve është çaktivizuar vetvetiu, pasi përplaset me Mirëfilltësuesin Google. Që të mund të ktheni Hyrjen parazgjedhje (pa Mirëfilltësues Google), ju lutemi, çaktivizoni shtojcën Mirëfilltësues Google."
     }
 }

@@ -26,6 +26,6 @@
         "Disabled": "Η υποστήριξη για το Google Authenticator για αυτόν τον λογαριασμό έχει απενεργοποιηθεί",
         "AuthCodeRequired": "Παρακαλώ εισάγετε τον κωδικό πιστοποίησης από την εφαρμογή Google Authenticator.",
         "AuthCodeInvalid": "Ο κωδικός πιστοποίησης είναι λανθασμένος",
-        "LoginPluginDisabled": "Το πρόσθετο Είσοδος του Piwik απενεργοποιήθηκε αυτόματα, καθώς έρχεται σε σύγκρουση με το Google Authenticator. Αν επιθυμείτε να αλλάξετε στον προκαθορισμένο τρόπο εισόδου (χωρίς το Google Authenticator), απενεργοποιήστε το πρόσθετο Google Authenticator."
+        "LoginPluginDisabled": "Το πρόσθετο Είσοδος του Matomo απενεργοποιήθηκε αυτόματα, καθώς έρχεται σε σύγκρουση με το Google Authenticator. Αν επιθυμείτε να αλλάξετε στον προκαθορισμένο τρόπο εισόδου (χωρίς το Google Authenticator), απενεργοποιήστε το πρόσθετο Google Authenticator."
     }
 }

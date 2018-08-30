@@ -1,25 +1,24 @@
 {
   "name": "GoogleAuthenticator",
-  "version": "3.0.1",
-  "description": "Adds Google Authenticator Two Factor Auth to Piwik",
+  "version": "3.2.0",
+  "description": "Adds Google Authenticator Two Factor Auth to Matomo",
   "theme": false,
   "keywords": ["login", "authentication", "2FA", "google", "authenticator"],
-  "license": "BSD & GPL v3+",
+  "license": "BSD AND GPL-3.0+",
   "homepage": "https://github.com/sgiehl/piwik-plugin-GoogleAuthenticator",
   "require": {
-    "piwik": ">=3.0.0-b1,<4.0.0-b1",
+    "piwik": ">=3.6.0-b4,<4.0.0-b1",
     "php": ">=5.5"
   },
   "authors": [
     {
       "name": "Stefan Giehl",
-      "email": "stefan@piwik.org",
+      "email": "stefan@matomo.org",
       "homepage": "https://github.com/sgiehl"
     }
   ],
   "donate": {
       "paypal": "stefangiehl@web.de",
-      "flattr": "https://flattr.com/thing/4453253/sgiehlpiwik-plugin-GoogleAuthenticator-on-GitHub",
-      "bitcoin": "1NxyWNfsjSNQULGxPVJUkgf8D3rpdJEgM6"
+      "flattr": "https://flattr.com/thing/4453253/sgiehlpiwik-plugin-GoogleAuthenticator-on-GitHub"
   }
 }
